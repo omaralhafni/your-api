@@ -1,0 +1,64 @@
+.product-card {
+  @apply relative 
+  bg-transparent 
+  antialiased 
+  text-gray-900 
+  w-[250px] 
+  my-4 
+  max-h-[470px] 
+  m-auto
+  overflow-hidden;
+}
+
+.control-buttons {
+  top: -40px;
+  right: 0;
+  position: absolute;
+  display: flex;
+  transition: top 0.5s;
+}
+
+.product-card:hover > .control-buttons {
+  top: 0px;
+}
+
+.control-buttons-icon {
+  @apply h-8 
+  w-8 
+  m-1 
+  flex 
+  justify-center 
+  items-center 
+  border-2 
+  rounded-full
+  cursor-pointer;
+}
+
+.product-card-image {
+  @apply w-full 
+    h-[250px] 
+    object-cover 
+    object-center 
+    rounded-lg 
+    shadow-md;
+}
+
+.product-card-tag {
+  @apply bg-teal-200 
+    text-teal-800 
+    mt-2 
+    text-xs 
+    px-3 
+    py-1 
+    inline-block 
+    rounded-full 
+    font-semibold;
+}
+
+.description {
+  inline-size: 170px;
+  overflow-wrap: break-word;
+  @apply mt-4 
+  text-sm 
+  text-gray-600;
+}

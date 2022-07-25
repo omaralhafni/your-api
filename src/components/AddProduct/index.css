@@ -1,0 +1,12 @@
+.add-product-icon {
+  @apply h-16 
+    w-16 
+    fixed 
+    z-10 
+    bottom-8 
+    right-12 
+    text-slate-700 
+    cursor-cell 
+    rounded-full 
+    hover:bg-gray-100;
+}

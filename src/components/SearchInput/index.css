@@ -1,0 +1,31 @@
+.search_box {
+  @apply relative 
+  w-10/12 
+  lg:w-4/12 
+  flex
+  border-b
+  focus:ring-blue-500 
+    focus:border-blue-500 
+  border-gray-300
+  dark:border-gray-600 
+  dark:focus:ring-blue-500
+  dark:focus:border-blue-500;
+}
+
+.search_input {
+  @apply text-gray-900 
+    outline-none
+    block 
+    w-[90%]
+    p-2.5
+    dark:placeholder-gray-400 
+    dark:text-gray-700;
+}
+
+.search_icon {
+  @apply flex 
+    inset-y-0 
+    items-center 
+    pl-3 
+    cursor-pointer;
+}
