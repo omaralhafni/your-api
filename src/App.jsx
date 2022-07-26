@@ -2,7 +2,7 @@ import { useState, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ToastIfy } from "./components";
 import { UserContext } from "./context";
-import { Auth, Documentation, Layout, Login, NotFound, Profile, Register } from "./Pages";
+import { Auth, Documentation, Layout, Login, NotFound, Profile, Register, Product } from "./Pages";
 import { checkTokenExpiration, Authorized, Unauthorized } from './utils';
 
 const Home = lazy(() => import('./Pages/Home'));
@@ -22,6 +22,7 @@ function App() {
           <Route path="/" element={<Authorized children={<Layout />} />}>
             <Route path="" element={<Home />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="Product/:productId" element={<Product />} />
           </Route>
 
           <Route path="/doc" element={<Documentation />} />

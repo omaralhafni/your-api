@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 import { ControlRecordModal, DeleteModal } from '../Modals';
 import { deleteProductApi } from '../../api';
 import './index.css';
@@ -43,22 +44,24 @@ const Card = ({
 
                 <img src={data?.imageBanner} alt="product" className="product-card-image" />
 
-                <div className="relative px-4 -mt-16 mb-5 cursor-pointer">
-                    <div className="bg-white py-2 px-6 rounded-lg shadow-lg">
-                        <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate">{data?.name}</h4>
-                        <p className="description">
-                            {
-                                data?.description.length > 55 ?
-                                    `${data?.description.slice(0, 55)} ... read more`
-                                    :
-                                    data?.description
-                            }
-                        </p>
-                        <div className="product-card-tag">
-                            {data?.category}
+                <Link to={`/Product/${data?._id}`}>
+                    <div className="relative px-4 -mt-16 mb-5 cursor-pointer">
+                        <div className="bg-white py-2 px-6 rounded-lg shadow-lg">
+                            <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate">{data?.name}</h4>
+                            <p className="description">
+                                {
+                                    data?.description.length > 55 ?
+                                        `${data?.description.slice(0, 55)} ... read more`
+                                        :
+                                        data?.description
+                                }
+                            </p>
+                            <div className="product-card-tag">
+                                {data?.category}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             </div>
             {/* update modal */}
             <ControlRecordModal

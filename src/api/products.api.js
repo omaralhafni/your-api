@@ -20,6 +20,21 @@ export const fetchProductsForUser = async (userName, query) => {
     }
 }
 
+// fetch single products data 
+export const fetchSingleProductsForUser = async (userName, productId) => {
+    try {
+        const { data } = await API.get(`/products/${userName}/${productId}`);
+        return { success: true, data: data }
+
+    } catch (error) {
+        const { response: { data: { message } } } = error;
+        toast.error(message, {
+            position: toast.POSITION.BOTTOM_CENTER
+        });
+        return { success: false, data: message }
+    }
+}
+
 // create product
 export const createProductApi = async (recordData) => {
     try {

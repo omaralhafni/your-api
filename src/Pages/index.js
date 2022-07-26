@@ -3,6 +3,7 @@ import Login from './Auth/Login';
 import Register from './Auth/Register';
 import Layout from './Layout';
 import Home from './Home';
+import Product from './Product';
 import Profile from './Profile';
 import Documentation from './Documentation';
 import NotFound from './NotFound';
@@ -14,6 +15,7 @@ export {
     Register,
     Layout,
     Home,
+    Product,
     Profile,
     Documentation,
     NotFound,
