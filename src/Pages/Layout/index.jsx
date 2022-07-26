@@ -7,7 +7,7 @@ const Layout = () => {
     return (
         <>
             <Nav />
-            <main className="container mx-auto px-8 pb-24 lg:pb-0" >
+            <main className="container mx-auto px-8 pb-20 md:pb-24 lg:pb-0" >
                 <Suspense fallback={<div className="text-black">Loading...</div>}>
                     <Outlet />
                 </Suspense>
