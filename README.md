@@ -1,5 +1,5 @@
 <h1 align="center"> 
- your api
+   <img src="./public/logo.png" height="60px" width="180px" />
 </h1>
 
 ## 📝 **Description**  <span id='desc'></span>
@@ -20,9 +20,9 @@
 - react-toastify
 
 
-<!-- ## 📺 **Live link** <span id='live'></span>
+## 🔴 **Live link** <span id='live'></span>
 
-You can visit the page [Here](--). -->
+You can visit the page [Here](https://x-your-api.netlify.app).
 
 
 ## 🏠 **Running the project locally** <span id='install'></span>
