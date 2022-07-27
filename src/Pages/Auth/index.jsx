@@ -9,7 +9,7 @@ const Auth = () => {
                 <div
                     className="absolute top-0 w-full h-full bg-blue-800 bg-no-repeat bg-cover"
                     style={{
-                        backgroundImage: "url(/assets/images/motion-projects.png)",
+                        backgroundImage: "url(/assets/images/motion-projects.jpg)",
                     }}
                 />
                 <div className="container m-auto px-4 h-screen">
