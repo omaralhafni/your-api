@@ -46,7 +46,7 @@ const Profile = () => {
     }
 
     const handleCopy = (name) => {
-        { navigator.clipboard.writeText(`https://myouapi.herokuapp.com/v1/products/${name}`) }
+        navigator.clipboard.writeText(`https://myouapi.herokuapp.com/v1/products/${name}`)
         toast.success("Copied!", {
             position: toast.POSITION.BOTTOM_RIGHT
         });
