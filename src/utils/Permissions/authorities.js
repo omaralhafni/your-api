@@ -9,6 +9,9 @@ export function Authorized({ children }) {
 }
 
 export function Unauthorized({ children }) {
+    console.log('Unauthorized start');
     const { userData: { isLogin } } = useContext(UserContext);
-    return !isLogin ? children : <Navigate to="/" />
+    console.log('Unauthorized isLogin', isLogin);
+
+    return isLogin ? <Navigate to="/" /> : children
 }

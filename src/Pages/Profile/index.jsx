@@ -47,7 +47,7 @@ const Profile = () => {
     return (
         <div className="w-full h-screen flex items-center justify-center">
             {isLoading ?
-                <form onSubmit={handleSubmit} className="relative w-96 h-auto bg-gray-400 dark:bg-gray-700 rounded-md pt-24 pb-8 px-16 shadow-md hover:shadow-lg transition flex flex-col items-center">
+                <form onSubmit={handleSubmit} className="relative w-96 h-auto bg-gray-400 dark:bg-gray-700 rounded-md pt-24 pb-8 px-5 lg:px-16 shadow-md hover:shadow-lg transition flex flex-col items-center">
                     <div className="absolute rounded-full bg-gray-100 w-28 h-28 p-2 z-10 -top-8 shadow-lg hover:shadow-xl transition">
                         {values?.profileImage && <img
                             className="w-full h-full rounded-full"
