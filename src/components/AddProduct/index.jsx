@@ -11,7 +11,9 @@ export const AddProduct = () => {
             <IoIosAddCircleOutline
                 className="add-product-icon"
                 onClick={() => setShowModal(true)} />
-            <ControlRecordModal showModal={showModal} closeModal={() => setShowModal(false)} />
+            <ControlRecordModal
+                showModal={showModal}
+                closeModal={() => setShowModal(false)} />
         </>
     )
 }

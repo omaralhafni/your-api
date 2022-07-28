@@ -17,8 +17,10 @@ export const Card = ({
     // handle delete
     const handleDelete = async () => {
         const { success } = await deleteProductApi(showDelete.id);
-        success && setShowDelete({ status: false, id: -1 });
-        deleteItem(showDelete.id)
+        if (success) {
+            setShowDelete({ status: false, id: -1 });
+            deleteItem(showDelete.id)
+        }
     }
 
     // handle edit data by modal
