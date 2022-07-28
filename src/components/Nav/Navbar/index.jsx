@@ -6,7 +6,7 @@ import { logout } from "../../../api";
 
 import "./index.css";
 
-const Navbar = ({ handleLogout }) => {
+export const Navbar = ({ handleLogout }) => {
   return (
     <nav className="navbar">
       <span className="logo">
@@ -27,5 +27,3 @@ const Navbar = ({ handleLogout }) => {
     </nav>
   );
 };
-
-export default Navbar;

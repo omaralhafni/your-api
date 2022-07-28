@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineSearch } from "react-icons/ai";
 import "./index.css";
 
-const SearchInput = ({
+export const SearchInput = ({
     handleSearch = () => { },
     fetchData = () => { },
     controlSearch = "false"
@@ -34,4 +34,3 @@ const SearchInput = ({
     )
 }
 
-export default SearchInput

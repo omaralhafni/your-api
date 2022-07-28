@@ -1,24 +1,17 @@
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
-
-import "./index.css";
 import { ControlRecordModal } from "../Modals";
+import "./index.css";
 
-const AddProduct = () => {
+export const AddProduct = () => {
     const [showModal, setShowModal] = useState(false);
-
-    const closeModal = () => {
-        setShowModal(false);
-    }
 
     return (
         <>
             <IoIosAddCircleOutline
                 className="add-product-icon"
                 onClick={() => setShowModal(true)} />
-            <ControlRecordModal showModal={showModal} closeModal={closeModal} />
+            <ControlRecordModal showModal={showModal} closeModal={() => setShowModal(false)} />
         </>
     )
 }
-
-export default AddProduct

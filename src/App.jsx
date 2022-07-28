@@ -1,11 +1,15 @@
 import { useState, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import { ToastIfy } from "./components";
 import { UserContext } from "./context";
-import { Auth, Documentation, Layout, Login, NotFound, Profile, Register, Product } from "./Pages";
-import { checkTokenExpiration, Authorized, Unauthorized } from './utils';
+import { Auth, Documentation, Layout, NotFound } from "./Pages";
+import { ToastIfy } from "./components";
+import { checkTokenExpiration, Authorized, Unauthorized } from "./utils";
 
+const Login = lazy(() => import('./Pages/Auth/Login'));
+const Register = lazy(() => import('./Pages/Auth/Register'));
 const Home = lazy(() => import('./Pages/Home'));
+const Profile = lazy(() => import('./Pages/Profile'));
+const Product = lazy(() => import('./Pages/Product'));
 
 function App() {
   const [userData, setUserData] = useState(checkTokenExpiration());

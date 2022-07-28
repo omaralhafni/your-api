@@ -1,0 +1,41 @@
+@keyframes spin-one {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-359deg);
+    transform: rotate(-359deg);
+  }
+}
+
+.spin-one {
+  -webkit-animation: spin-one 1.5s infinite linear;
+  animation: spin-one 1.5s infinite linear;
+}
+
+@keyframes spin-two {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.spin-two {
+  -webkit-animation: spin-two 2s infinite linear;
+  animation: spin-two 2s infinite linear;
+}
+
+.spin-four {
+  -webkit-animation: spin-one 4s infinite linear;
+  animation: spin-one 4s infinite linear;
+}
+
+.spin-three {
+  -webkit-animation: spin-two 4s infinite linear;
+  animation: spin-two 4s infinite linear;
+}

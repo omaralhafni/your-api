@@ -6,7 +6,7 @@ import { navigationData } from "../../../utils";
 import "./index.css";
 import { logout } from "../../../api";
 
-const TabBar = ({ handleLogout }) => {
+export const TabBar = ({ handleLogout }) => {
     return (
         <nav className="tabBar">
             {navigationData.map((item, index) => (
@@ -30,5 +30,3 @@ const TabBar = ({ handleLogout }) => {
         </nav>
     );
 };
-
-export default TabBar;

@@ -11,6 +11,7 @@ const Profile = () => {
     const [changePass, setChangePass] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
 
+    // save changes data for user
     const save = async () => {
         let savedValues = values;
 
@@ -23,6 +24,8 @@ const Profile = () => {
         setValues(data)
         setSaveBtn(false)
     }
+
+    // form hook handle values
     const {
         values,
         handleChange,
@@ -30,6 +33,7 @@ const Profile = () => {
         setValues,
     } = useForm(save);
 
+    // fetch data for user
     const fetchData = useCallback(async () => {
         const { data } = await fetchUserProfileData();
         setValues(data)
@@ -40,11 +44,13 @@ const Profile = () => {
         fetchData();
     }, [fetchData])
 
+    // control handle change values for inputs
     const handleChangeValues = (e) => {
         !saveBtn && setSaveBtn(true);
         handleChange(e);
     }
 
+    // handle click copy
     const handleCopy = (name) => {
         navigator.clipboard.writeText(`https://myouapi.herokuapp.com/v1/products/${name}`)
         toast.success("Copied!", {

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerApi } from "../../../api";
-import { Input } from "../../../components";
 import { UserContext } from "../../../context";
+import { Input } from "../../../components";
 import { registerValidate, useForm } from "../../../utils";
 
 const Register = () => {

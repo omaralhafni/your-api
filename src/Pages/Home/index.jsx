@@ -1,7 +1,7 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
-import { fetchProductsForUser } from '../../api/products.api';
-import { AddProduct, Card, NoProducts, SearchInput, Spinner } from '../../components';
-import { UserContext } from '../../context';
+import React, { useCallback, useContext, useEffect, useState } from "react"
+import { UserContext } from "../../context";
+import { fetchProductsForUser } from "../../api/products.api";
+import { AddProduct, Card, NoProducts, SearchInput, Spinner } from "../../components";
 
 const Home = () => {
     const { userData: { userName } } = useContext(UserContext);
@@ -46,8 +46,8 @@ const Home = () => {
     // handle search from products
     const handleSearch = async (e, searchKey) => {
         e.preventDefault();
-        setControlSearch(true)
         setIsLoading(true);
+        setControlSearch(true)
         setNumPages(0);
         const { data: { products, total } } = await fetchProductsForUser(userName, { numPages, keyword: searchKey });
         setData(products);
@@ -70,7 +70,6 @@ const Home = () => {
 
                     data.length > 0 ?
                         <>
-                            {/* <section className={`container mx-auto flex flex-col flex-wrap items-center md:h-[2700px] lg:h-[${1450}px] `} > */}
                             <section className={`container mx-auto grid justify-center md:grid-cols-2 lg:grid-cols-4 gap-4`} >
                                 {data?.map((element, index) =>
                                     <Card
@@ -81,7 +80,6 @@ const Home = () => {
                                     />
                                 )}
                             </section>
-                            {/* </div> */}
                             <div className="flex justify-center m-6 pb-24 lg:pb-0" >
                                 {data.length !== totalProducts &&
                                     <button
@@ -93,8 +91,6 @@ const Home = () => {
                             </div>
                         </>
                         : <NoProducts />
-
-
             }
         </>
     )

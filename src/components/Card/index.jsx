@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
-import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 import { Link } from 'react-router-dom';
+import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 import { ControlRecordModal, DeleteModal } from '../Modals';
 import { deleteProductApi } from '../../api';
 import './index.css';
 
-const Card = ({
+export const Card = ({
     data = {},
-    // image = "https://source.unsplash.com/random/350x350",
-    deleteItem = () => { },
-    editItem = () => { }
+    editItem = () => { },
+    deleteItem = () => { }
 }) => {
     const [showDelete, setShowDelete] = useState({ status: false, id: -1 });
     const [modalData, setModalData] = useState({});
     const [showModal, setShowModal] = useState(false);
 
-    const closeModal = () => {
-        setShowModal(false);
-    }
-
+    // handle delete
     const handleDelete = async () => {
         const { success } = await deleteProductApi(showDelete.id);
         success && setShowDelete({ status: false, id: -1 });
         deleteItem(showDelete.id)
     }
 
+    // handle edit data by modal
     const handelEditModal = (currentCardData) => {
         setModalData(currentCardData)
         setShowModal(true);
@@ -34,10 +31,14 @@ const Card = ({
         <>
             <div className="product-card">
                 <div className="control-buttons">
-                    <div className="control-buttons-icon border-green-700" onClick={() => handelEditModal(data)} >
+                    <div
+                        className="control-buttons-icon border-green-700"
+                        onClick={() => handelEditModal(data)}>
                         <AiFillEdit color="green" />
                     </div>
-                    <div className="control-buttons-icon border-red-600" onClick={() => setShowDelete({ status: true, id: data?._id })} >
+                    <div
+                        className="control-buttons-icon border-red-600"
+                        onClick={() => setShowDelete({ status: true, id: data?._id })}>
                         <AiOutlineDelete color="red" />
                     </div>
                 </div>
@@ -47,7 +48,7 @@ const Card = ({
                 <Link to={`/Product/${data?._id}`}>
                     <div className="relative px-4 -mt-16 mb-5 cursor-pointer">
                         <div className="bg-white py-2 px-6 rounded-lg shadow-lg">
-                            <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate">{data?.name}</h4>
+                            <h4 className="card-name">{data?.name}</h4>
                             <p className="description">
                                 {
                                     data?.description.length > 55 ?
@@ -66,7 +67,7 @@ const Card = ({
             {/* update modal */}
             <ControlRecordModal
                 showModal={showModal}
-                closeModal={closeModal}
+                closeModal={() => setShowModal(false)}
                 successModal={editItem}
                 modalType={"edit"}
                 modalData={modalData}
@@ -80,7 +81,3 @@ const Card = ({
         </>
     )
 }
-
-
-
-export default Card;

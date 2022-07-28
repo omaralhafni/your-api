@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import API from './setupAxios';
 
-
+// upload image api
 export const uploadImage = async (imgData) => {
     try {
         const formData = new FormData()

@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import API from './setupAxios';
 
+// login function api
 export const loginApi = async (loginData, cb) => {
     try {
         if (loginData?.email !== '' && loginData?.password !== '') {
@@ -23,6 +24,7 @@ export const loginApi = async (loginData, cb) => {
     }
 }
 
+// register function api
 export const registerApi = async (registerData, cb) => {
     try {
         if (
@@ -55,6 +57,7 @@ export const registerApi = async (registerData, cb) => {
     }
 }
 
+// logout function api
 export const logout = (cb) => {
     localStorage.clear();
     cb?.()

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { NavLink, Outlet } from "react-router-dom";
-import './index.css';
+import { Spinner } from "../../components";
 
 const Auth = () => {
     return (
@@ -26,8 +26,9 @@ const Auth = () => {
                             </h1>
 
                             <hr className="mb-5 mx-5 border-b-1 border-Gray-300" />
-
-                            <Outlet />
+                            <Suspense fallback={<Spinner className="w-full h-full p-10" color="#374151" />}>
+                                <Outlet />
+                            </Suspense>
                         </div>
                     </div>
                 </div>

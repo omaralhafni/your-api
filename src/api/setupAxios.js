@@ -15,7 +15,6 @@ Axios.interceptors.request.use(
         return Promise.reject(error);
     }
 )
-
 export default class API {
     static async get(url = "", config = {}) {
         return Axios.get(url, config);

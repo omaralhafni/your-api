@@ -1,3 +1,9 @@
+.display-input-label {
+  @apply text-gray-600 
+  dark:text-gray-400 
+  font-bold w-[40%];
+}
+
 .input-profile {
   @apply block 
     py-1
@@ -9,9 +15,8 @@
     text-gray-900 
     bg-transparent 
     border-0
-    /* text-center */
     border-gray-300 
-    appearance-none 
+    appearance-none
     dark:text-white
     dark:border-gray-600 
     dark:focus:border-blue-500 

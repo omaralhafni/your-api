@@ -1,0 +1,38 @@
+.image-label {
+  @apply flex
+    flex-col
+    justify-center
+    items-center
+    p-5
+    w-full
+    h-full
+    bg-gray-50
+    rounded-lg
+    border-2
+    border-gray-300
+    cursor-pointer
+    dark:bg-gray-700
+    hover:bg-gray-100
+    dark:border-gray-600
+    dark:hover:border-gray-500
+    dark:hover:bg-gray-600;
+}
+
+.image-label-empty {
+  @apply flex 
+  flex-col 
+  justify-center 
+  items-center 
+  w-24 
+  h-24 
+  bg-gray-50 
+  border-2 
+  border-gray-300 
+  border-dashed 
+  cursor-pointer 
+  divide-dashed 
+  hover:bg-gray-100 
+  dark:border-gray-600 
+  dark:hover:border-gray-500 
+  dark:hover:bg-gray-100 p-5;
+}

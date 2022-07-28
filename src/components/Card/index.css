@@ -11,15 +11,17 @@
 }
 
 .control-buttons {
-  top: -40px;
-  right: 0;
-  position: absolute;
-  display: flex;
-  transition: top 0.5s;
+  @apply -top-10
+  right-0
+  absolute
+  flex
+  transition-all
+  ease-in-out
+  duration-500;
 }
 
 .product-card:hover > .control-buttons {
-  top: 0px;
+  @apply top-0;
 }
 
 .control-buttons-icon {
@@ -56,9 +58,16 @@
 }
 
 .description {
-  inline-size: 170px;
-  overflow-wrap: break-word;
   @apply mt-4 
   text-sm 
   text-gray-600;
+}
+
+.card-name {
+  @apply mt-1
+  text-xl
+  font-semibold
+  uppercase
+  leading-tight
+  truncate;
 }

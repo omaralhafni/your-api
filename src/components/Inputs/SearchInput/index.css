@@ -13,7 +13,8 @@
 }
 
 .search_input {
-  @apply text-gray-900 
+  @apply text-gray-900
+    bg-transparent 
     outline-none
     block 
     w-[90%]

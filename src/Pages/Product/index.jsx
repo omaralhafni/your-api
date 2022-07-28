@@ -1,8 +1,8 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
-import { BsArrowBarDown } from 'react-icons/bs';
-import { fetchSingleProductsForUser } from '../../api/products.api';
-import { UserContext } from '../../context';
+import React, { useCallback, useContext, useEffect, useState } from "react"
+import { useParams } from "react-router-dom";
+import { BsArrowBarDown } from "react-icons/bs";
+import { UserContext } from "../../context";
+import { fetchSingleProductsForUser } from "../../api/products.api";
 
 const Product = () => {
     const { userData: { userName } } = useContext(UserContext);
@@ -13,8 +13,9 @@ const Product = () => {
     });
     const [images, setImages] = useState([]);
     const [active, setActive] = useState(0);
-    let { productId } = useParams();
+    const { productId } = useParams();
 
+    // fetch product data
     const fetchData = useCallback(async () => {
         const { data } = await fetchSingleProductsForUser(userName, productId);
         setProductData(data);
@@ -62,4 +63,4 @@ const Product = () => {
     )
 }
 
-export default Product
+export default Product;

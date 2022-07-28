@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Nav } from '../../components';
+import { Nav, Spinner } from '../../components';
 
 
 const Layout = () => {
@@ -8,7 +8,7 @@ const Layout = () => {
         <>
             <Nav />
             <main className="container mx-auto px-8 pb-20 md:pb-24 lg:pb-0" >
-                <Suspense fallback={<div className="text-black">Loading...</div>}>
+                <Suspense fallback={<Spinner className="w-full h-full p-10" color="#374151" />}>
                     <Outlet />
                 </Suspense>
             </main>

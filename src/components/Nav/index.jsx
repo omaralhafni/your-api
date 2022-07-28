@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context';
-import Navbar from './Navbar';
-import TabBar from './TabBar';
+import { Navbar } from './Navbar';
+import { TabBar } from './TabBar';
 
-const Nav = () => {
+export const Nav = () => {
     const navigate = useNavigate();
     const userContext = useContext(UserContext);
 
@@ -19,5 +19,3 @@ const Nav = () => {
         </>
     )
 }
-
-export default Nav
