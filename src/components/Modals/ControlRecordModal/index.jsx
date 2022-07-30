@@ -16,21 +16,25 @@ export const ControlRecordModal = ({
 }) => {
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
+    const {
+        values,
+        handleChange,
+        setValues,
+    } = useForm();
+
+    const handleFirstCall = useCallback(() => {
         setValues(modalData);
-    }, [modalData]);
+    }, [modalData, setValues])
+
+    useEffect(() => {
+        handleFirstCall()
+    }, [handleFirstCall]);
 
     // handle change image and banner image form values
     const handleAddImage = async (e, index) => {
         setValues(dataValues => ({ ...dataValues, images: dataValues.images.map((item, i) => index === i ? e.target.files[0] : item) }))
     }
 
-    const {
-        values,
-        handleChange,
-        setValues,
-    } = useForm();
-    
     // handle delete image
     const handleDeleteImage = useCallback((index) => {
         setValues(dataValues => ({ ...dataValues, images: dataValues.images.filter((_, i) => index !== i) }))
