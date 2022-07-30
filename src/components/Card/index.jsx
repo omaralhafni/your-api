@@ -1,33 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
-import { ControlRecordModal, DeleteModal } from '../Modals';
-import { deleteProductApi } from '../../api';
 import './index.css';
 
 export const Card = ({
     data = {},
-    editItem = () => { },
-    deleteItem = () => { }
+    handelEditModal = () => { },
+    setShowDelete = () => { }
 }) => {
-    const [showDelete, setShowDelete] = useState({ status: false, id: -1 });
-    const [modalData, setModalData] = useState({});
-    const [showModal, setShowModal] = useState(false);
-
-    // handle delete
-    const handleDelete = async () => {
-        const { success } = await deleteProductApi(showDelete.id);
-        if (success) {
-            setShowDelete({ status: false, id: -1 });
-            deleteItem(showDelete.id)
-        }
-    }
-
-    // handle edit data by modal
-    const handelEditModal = (currentCardData) => {
-        setModalData(currentCardData)
-        setShowModal(true);
-    }
 
     return (
         <>
@@ -66,20 +46,6 @@ export const Card = ({
                     </div>
                 </Link>
             </div>
-            {/* update modal */}
-            <ControlRecordModal
-                showModal={showModal}
-                closeModal={() => setShowModal(false)}
-                successModal={editItem}
-                modalType={"edit"}
-                modalData={modalData}
-            />
-            {/* delete modal */}
-            <DeleteModal
-                showModal={showDelete.status}
-                closeModal={() => setShowDelete(false)}
-                confirm={() => handleDelete()}
-            />
         </>
     )
 }

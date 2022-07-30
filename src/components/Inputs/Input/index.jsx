@@ -3,6 +3,7 @@ import "./index.css";
 export const Input = ({
     label = "",
     name = "",
+    max = "",
     values = {},
     errors = {},
     handleChange = () => { }
@@ -16,6 +17,7 @@ export const Input = ({
                 value={values[name] || ''}
                 className={`auth-input peer ${errors[name] && "border-b-[3px] border-pink-500"}`}
                 placeholder=" "
+                maxlength={max}
                 required
             />
 

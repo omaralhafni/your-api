@@ -1,10 +1,9 @@
 import { ToastIfy } from "./ToastIfy";
 import { Nav } from "./Nav";
-import { Input, SearchInput, DisplayInput } from "./Inputs";
+import { Input, SearchInput, DisplayInput, ImageInput } from "./Inputs";
 import { Card } from "./Card";
-import { AddProduct } from "./AddProduct";
 import { NoProducts } from "./NoProducts";
-import { Modal } from "./Modals";
+import { Modal, ControlRecordModal, DeleteModal } from "./Modals";
 import { Spinner } from "./Spinner";
 
 
@@ -12,11 +11,13 @@ export {
     ToastIfy,
     Nav,
     Input,
-    DisplayInput,
     SearchInput,
+    DisplayInput,
+    ImageInput,
     Card,
-    AddProduct,
     NoProducts,
     Modal,
+    ControlRecordModal,
+    DeleteModal,
     Spinner
 };

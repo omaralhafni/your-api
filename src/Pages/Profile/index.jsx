@@ -73,14 +73,14 @@ const Profile = () => {
                                     URL.createObjectURL(values?.profileImage)}
                             alt="user profile"
                         />
-                        <label htmlFor="profile_images" className="">
+                        <label htmlFor="profile_images">
                             <IoIosAddCircleOutline type="file" className="text-white bottom-0 right-3 absolute w-6 h-6 bg-gray-500 rounded-full cursor-pointer" />
                             <input
+                                type="file"
+                                className="hidden"
                                 id="profile_images"
                                 name="profileImage"
                                 onChange={handleChangeValues}
-                                type="file"
-                                className="hidden"
                             />
                         </label>
                     </div>

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { BsImages } from "react-icons/bs";
+import { useCallback, useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { createProductApi, updateProductApi, uploadImage } from "../../../api";
-import { Input } from "../../index.js";
+import { useForm } from "../../../utils";
+import { Input, ImageInput } from "../../index.js";
 import { Spinner } from "../../Spinner";
 import { Modal } from "../Modal";
 import "./index.css";
@@ -14,56 +14,41 @@ export const ControlRecordModal = ({
     modalType = "",
     modalData = {}
 }) => {
-    const [values, setValues] = useState({});
-    const [images, setImages] = useState([""]);
-    const [imageBanner, setImageBanner] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
-    // handel states if modal form edit
     useEffect(() => {
-        if (modalType === "edit") {
-            setValues({
-                name: modalData?.name,
-                description: modalData?.description,
-                category: modalData?.category
-            });
-            setImages(modalData?.images || [""]);
-            setImageBanner(modalData?.imageBanner || "");
-        }
-    }, [modalData, modalType]);
-
-    // handle change inputs values
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setValues(values => ({ ...values, [name]: value }));
-    }
+        setValues(modalData);
+    }, [modalData]);
 
     // handle change image and banner image form values
-    const handleAddImage = async (e, i, type) => {
-        type === "banner" ?
-            setImageBanner(e.target.files[0])
-            :
-            setImages(images.map((item, index) => i === index ? e.target.files[0] : item))
+    const handleAddImage = async (e, index) => {
+        setValues(dataValues => ({ ...dataValues, images: dataValues.images.map((item, i) => index === i ? e.target.files[0] : item) }))
     }
 
+    const {
+        values,
+        handleChange,
+        setValues,
+    } = useForm();
+    
     // handle delete image
-    const handleDeleteImage = (i) => {
-        setImages(images.filter((_, index) => i !== index))
-    }
+    const handleDeleteImage = useCallback((index) => {
+        setValues(dataValues => ({ ...dataValues, images: dataValues.images.filter((_, i) => index !== i) }))
+    }, [setValues])
 
     // handle save and update modal values
     const saveModal = async () => {
         try {
             setIsLoading(true)
 
-            let banner = imageBanner
-            if (typeof imageBanner !== "string") {
-                banner = await uploadImage(imageBanner);
+            let banner = values?.imageBanner;
+            if (typeof values?.imageBanner !== "string") {
+                banner = await uploadImage(values?.imageBanner);
             }
 
             let urlsImages = []
 
-            for (const element of images) {
+            for (const element of values?.images) {
                 if (element !== "" && typeof element !== "string") {
                     const imagesData = await uploadImage(element);
                     urlsImages = [...urlsImages, imagesData.data];
@@ -85,15 +70,19 @@ export const ControlRecordModal = ({
                 :
                 await createProductApi(savedData)
 
+            successModal(data);
             if (modalType === "edit") {
-                successModal(data);
                 closeModal()
             }
 
             if (success) {
-                setValues({});
-                setImages([""]);
-                setImageBanner("")
+                setValues({
+                    name: "",
+                    description: "",
+                    category: "",
+                    images: [""],
+                    imageBanner: ""
+                });
             }
             setIsLoading(false)
         } catch (error) {
@@ -112,6 +101,7 @@ export const ControlRecordModal = ({
                         name="name"
                         values={values}
                         handleChange={handleChange}
+                        max={20}
                     />
 
                     <Input
@@ -119,6 +109,7 @@ export const ControlRecordModal = ({
                         name="description"
                         values={values}
                         handleChange={handleChange}
+                        max={30}
                     />
 
                     <Input
@@ -126,76 +117,48 @@ export const ControlRecordModal = ({
                         name="category"
                         values={values}
                         handleChange={handleChange}
+                        max={10}
                     />
 
                     {/* add banner image */}
                     <label className="block m-2 text-sm font-medium text-gray-400">
                         add banner image for record
                     </label>
-                    <div className="w-24 h-24 rounded-lg overflow-hidden relative">
-                        <span
-                            onClick={() => setImageBanner("")}
-                            className={imageBanner === "" ? "hidden" : "absolute p-1 right-2 text-red-300 cursor-pointer"}
-                        >x</span>
-                        {
-                            imageBanner === "" ?
-                                <label
-                                    onChange={(e) => handleAddImage(e, "", "banner")}
-                                    htmlFor="banner_images"
-                                    className="image-label">
-                                    <BsImages className="text-white w-full h-full" />
-                                    <input
-                                        id="banner_images"
-                                        type="file"
-                                        className="hidden"
 
-                                    />
-                                </label>
-                                :
-                                <img
-                                    src={typeof imageBanner == "string" ? imageBanner : URL.createObjectURL(imageBanner)}
-                                    className="w-full h-full"
-                                    alt="upload" />
-                        }
-                    </div>
+                    <ImageInput
+                        image={values?.imageBanner}
+                        _id="banner"
+                        name="imageBanner"
+                        displayClose={values?.imageBanner !== ""}
+                        handleChange={handleChange}
+                        handleClose={() => setValues(dataValues => ({ ...dataValues, imageBanner: "" }))}
+                    />
+
 
                     {/* add  images */}
-                    <label className="block m-2 text-sm font-medium text-gray-400">add images for record</label>
+                    <label className="block m-2 text-sm font-medium text-gray-400">
+                        add images for record
+                    </label>
                     <div className="flex flex-wrap gap-2">
-                        {images.map((item, index) =>
-                            <div key={index} className="w-24 h-24 rounded-lg overflow-hidden relative">
-                                <span
-                                    onClick={() => handleDeleteImage(index)}
-                                    className="absolute p-1 right-2 text-red-300 cursor-pointer"
-                                >x</span>
-                                {
-                                    item === "" ?
-                                        <label
-                                            onChange={(e) => handleAddImage(e, index)}
-                                            htmlFor={`_images_${index}`}
-                                            className="image-label"
-                                        >
-                                            <BsImages className="text-white w-full h-full" />
-                                            <input
-                                                id={`_images_${index}`}
-                                                type="file"
-                                                className="hidden"
+                        {values?.images?.map((item, index) =>
 
-                                            />
-                                        </label>
-                                        :
-                                        <img src={typeof item == "string" ? item : URL.createObjectURL(item)} alt="upload" className="w-full h-full" />
-                                }
-                            </div>
+                            <ImageInput
+                                image={item}
+                                _id={index}
+                                name="images"
+                                displayClose={values?.images.length > 1}
+                                handleClose={() => handleDeleteImage(index)}
+                                handleChange={(e) => handleAddImage(e, index)}
+                            />
+
                         )}
                         {
-                            images.length < 5 ?
-                                <label className="image-label-empty"
-                                    onClick={() => setImages([...images, ""])}
-                                >
-                                    <MdAdd className="text-gray-700 w-full h-full" />
-                                </label>
-                                : null
+                            values?.images && values?.images.length < 5 &&
+                            <label className="image-label-empty"
+                                onClick={() => setValues(dataValuesX => ({ ...dataValuesX, images: [...dataValuesX?.images, ""] }))}
+                            >
+                                <MdAdd className="text-gray-700 w-full h-full" />
+                            </label>
                         }
                     </div>
                 </form>

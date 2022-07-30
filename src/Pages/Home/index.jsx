@@ -1,8 +1,9 @@
-import React, { useCallback, useContext, useEffect, useState } from "react"
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { IoIosAddCircleOutline } from "react-icons/io";
 import { UserContext } from "../../context";
-import { fetchProductsForUser } from "../../api/products.api";
-import { AddProduct, Card, NoProducts, SearchInput, Spinner } from "../../components";
-
+import { deleteProductApi, fetchProductsForUser } from "../../api/products.api";
+import { Card, NoProducts, SearchInput, Spinner, ControlRecordModal, DeleteModal } from "../../components";
+import "./index.css";
 const Home = () => {
     const { userData: { userName } } = useContext(UserContext);
     const [data, setData] = useState([]);
@@ -10,6 +11,18 @@ const Home = () => {
     const [totalProducts, setTotalProducts] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [controlSearch, setControlSearch] = useState(false);
+
+    const [modalData, setModalData] = useState({
+        name: "",
+        description: "",
+        category: "",
+        images: [""],
+        imageBanner: ""
+    });
+    const [modalType, setModalType] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [showDelete, setShowDelete] = useState({ status: false, id: -1 });
+
 
     // function fetch first data
     const fetchData = useCallback(async () => {
@@ -33,6 +46,31 @@ const Home = () => {
         setTotalProducts(total);
     }, [userName]);
 
+    // handle add modal 
+    const handleAddProduct = () => {
+        setShowModal(true);
+        setModalType("add");
+        setModalData({
+            name: "",
+            description: "",
+            category: "",
+            images: [""],
+            imageBanner: ""
+        });
+    }
+
+    // handle edit data by modal
+    const handelEditModal = (currentCardData) => {
+        setModalType("edit");
+        setModalData(currentCardData);
+        setShowModal(true);
+    }
+
+    // handle edit item from page [state]
+    const addItem = (newtData) => {
+        data.length / 12 !== 1 && setData(items => ([...items, newtData]));
+    }
+
     // handle edit item from page [state]
     const editItem = (editData) => {
         setData(data.map(item => item._id === editData._id ? editData : item));
@@ -41,6 +79,15 @@ const Home = () => {
     // handle delete item from page [state]
     const deleteItem = (id) => {
         setData(data.filter(item => item._id !== id));
+    }
+
+    // handle delete
+    const handleDelete = async () => {
+        const { success } = await deleteProductApi(showDelete.id);
+        if (success) {
+            setShowDelete({ status: false, id: -1 });
+            deleteItem(showDelete.id)
+        }
     }
 
     // handle search from products
@@ -57,7 +104,10 @@ const Home = () => {
 
     return (
         <>
-            <AddProduct />
+            <IoIosAddCircleOutline
+                className="add-product-icon"
+                onClick={() => handleAddProduct()}
+            />
 
             <SearchInput handleSearch={handleSearch} fetchData={fetchData} controlSearch={controlSearch} />
             {
@@ -66,17 +116,17 @@ const Home = () => {
                         <Spinner color="#374151" />
                     </div>
                     :
-
-
                     data.length > 0 ?
                         <>
-                            <section className={`container mx-auto grid justify-center md:grid-cols-2 lg:grid-cols-4 gap-4`} >
+                            <section className="home-container" >
                                 {data?.map((element, index) =>
                                     <Card
                                         key={index}
                                         data={element}
-                                        deleteItem={deleteItem}
                                         editItem={editItem}
+                                        handelEditModal={handelEditModal}
+                                        deleteItem={deleteItem}
+                                        setShowDelete={setShowDelete}
                                     />
                                 )}
                             </section>
@@ -84,11 +134,26 @@ const Home = () => {
                                 {data.length !== totalProducts &&
                                     <button
                                         onClick={() => fetchDataByPageNum(numPages + 1)}
-                                        className="bg-transparent w-30 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                        className="show-more-btn ">
                                         Show More
                                     </button>
                                 }
                             </div>
+
+                            {/* update modal */}
+                            <ControlRecordModal
+                                showModal={showModal}
+                                closeModal={() => setShowModal(false)}
+                                successModal={modalType === "edit" ? editItem : addItem}
+                                modalType={modalType}
+                                modalData={modalData}
+                            />
+                            {/* delete modal */}
+                            <DeleteModal
+                                showModal={showDelete.status}
+                                closeModal={() => setShowDelete({ status: false, id: -1 })}
+                                confirm={() => handleDelete()}
+                            />
                         </>
                         : <NoProducts />
             }

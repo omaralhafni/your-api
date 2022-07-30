@@ -28,7 +28,7 @@ export const DeleteModal = ({
                                 <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
                                 <button
                                     type="button"
-                                    className="btn-save-modal"
+                                    className="btn-save-modal bg-red-600 "
                                     onClick={confirm}>
                                     Yes, I'm sure
                                 </button>

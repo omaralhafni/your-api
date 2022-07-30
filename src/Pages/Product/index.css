@@ -1,0 +1,36 @@
+.product-container {
+  @apply w-full
+  lg:h-[92vh]
+  flex
+  flex-col
+  lg:flex-row
+  justify-center
+  items-center;
+}
+.product-title {
+  inline-size: 450px;
+  overflow-wrap: break-word;
+  @apply uppercase
+  font-bold
+  text-3xl
+  lg:text-7xl
+  my-9;
+}
+.product-image {
+  @apply my-3
+  cursor-pointer
+  w-full
+  flex
+  flex-col
+  lg:flex-row
+  hover:drop-shadow-2xl;
+}
+.product-image-description {
+  @apply my-3
+  cursor-pointer
+  w-full
+  flex
+  flex-col
+  lg:flex-row
+  hover:drop-shadow-2xl;
+}

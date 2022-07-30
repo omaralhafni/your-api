@@ -27,13 +27,13 @@ class ErrorBoundary extends Component {
                     <AiTwotoneSetting className="spin-three block w-80 h-80 -mt-3 mr-2 text-[#a1939385] absolute bottom-0 right-10" />
                     <AiOutlineSetting className="spin-four block w-80 h-80 -mt-3 mr-2 text-[#a1939385] absolute top-20 left-40" />
 
-                    <div className="h-[50vh] bg-white p-20 rounded drop-shadow-2xl flex flex-col items-center">
+                    <div className="h-[50vh] bg-white p-1 lg:p-20 rounded drop-shadow-2xl flex flex-col items-center justify-center">
                         <div className="w-full h-16 mb-24 relative flex justify-center">
                             <AiTwotoneSetting className="spin-one block w-20 h-20 -mt-3 mr-2 text-[#334155]" />
                             <AiOutlineSetting className="spin-two block w-28 h-28 text-[#5fb1f4]" />
                             <AiTwotoneSetting className="spin-one block w-20 h-20 -mt-14 mr-2 text-[#334155]" />
                         </div>
-                        <h1 className="text-2xl lg:text-3xl font-bold uppercase text-gray-600" >Something went wrong</h1>
+                        <h1 className="text-1xl lg:text-3xl font-bold uppercase text-gray-600" >Something went wrong</h1>
                     </div>
                 </div>
             )
