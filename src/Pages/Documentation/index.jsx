@@ -1,14 +1,13 @@
 import { useState } from "react"
-import { Nav, Spinner } from "../../components"
+import { Loader, Nav } from "../../components"
 
 const Documentation = () => {
     const [loading, setLoading] = useState(true)
     return (
         <>
             <Nav />
-            {loading &&
-                <Spinner customerStyle="w-full h-full p-10" color="#374151" />
-            }
+            <Loader loading={loading} />
+
             <iframe
                 title="swagger doc"
                 src="https://myouapi.herokuapp.com/swagger"

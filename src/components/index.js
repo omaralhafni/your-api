@@ -5,6 +5,7 @@ import { Card } from "./Card";
 import { NoProducts } from "./NoProducts";
 import { Modal, ControlRecordModal, DeleteModal } from "./Modals";
 import { Spinner } from "./Spinner";
+import { Loader } from "./Loader";
 
 
 export {
@@ -19,5 +20,6 @@ export {
     Modal,
     ControlRecordModal,
     DeleteModal,
-    Spinner
+    Spinner,
+    Loader
 };

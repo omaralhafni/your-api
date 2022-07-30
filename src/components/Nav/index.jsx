@@ -10,7 +10,7 @@ export const Nav = () => {
 
     const handleLogout = () => {
         navigate('/auth/login');
-        userContext.setUserData(false)
+        userContext.setUserData({ isLogin: false, userId: "", userName: "" })
     }
     return (
         <>

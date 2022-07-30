@@ -9,7 +9,7 @@ import { logout } from "../../../api";
 export const TabBar = ({ handleLogout }) => {
     return (
         <nav className="tabBar">
-            {navigationData.map((item, index) => (
+            {navigationData?.map((item, index) => (
                 <NavLink
                     to={item.path}
                     key={item.name}

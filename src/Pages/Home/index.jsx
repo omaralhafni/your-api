@@ -4,6 +4,13 @@ import { UserContext } from "../../context";
 import { deleteProductApi, fetchProductsForUser } from "../../api/products.api";
 import { Card, NoProducts, SearchInput, Spinner, ControlRecordModal, DeleteModal } from "../../components";
 import "./index.css";
+const initialModalValue = {
+    name: "",
+    description: "",
+    category: "",
+    images: [""],
+    imageBanner: ""
+}
 const Home = () => {
     const { userData: { userName } } = useContext(UserContext);
     const [data, setData] = useState([]);
@@ -12,14 +19,7 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [controlSearch, setControlSearch] = useState(false);
 
-    const [modalData, setModalData] = useState({
-        name: "",
-        description: "",
-        category: "",
-        images: [""],
-        imageBanner: ""
-    });
-    const [modalType, setModalType] = useState("");
+    const [modalData, setModalData] = useState(initialModalValue);
     const [showModal, setShowModal] = useState(false);
     const [showDelete, setShowDelete] = useState({ status: false, id: -1 });
 
@@ -46,24 +46,13 @@ const Home = () => {
         setTotalProducts(total);
     }, [userName]);
 
-    // handle add modal 
-    const handleAddProduct = () => {
-        setShowModal(true);
-        setModalType("add");
-        setModalData({
-            name: "",
-            description: "",
-            category: "",
-            images: [""],
-            imageBanner: ""
-        });
-    }
-
     // handle edit data by modal
-    const handelEditModal = (currentCardData) => {
-        setModalType("edit");
-        setModalData(currentCardData);
+    const handelEditModal = (currentCardData = initialModalValue) => {
         setShowModal(true);
+        if (currentCardData._id) {
+            setModalData(currentCardData);
+        }
+        setModalData(initialModalValue);
     }
 
     // handle edit item from page [state]
@@ -102,11 +91,14 @@ const Home = () => {
         setIsLoading(false);
     }
 
+
+    console.log('datata', modalData);
+
     return (
         <>
             <IoIosAddCircleOutline
                 className="add-product-icon"
-                onClick={() => handleAddProduct()}
+                onClick={handelEditModal}
             />
 
             <SearchInput handleSearch={handleSearch} fetchData={fetchData} controlSearch={controlSearch} />
@@ -123,9 +115,7 @@ const Home = () => {
                                     <Card
                                         key={index}
                                         data={element}
-                                        editItem={editItem}
                                         handelEditModal={handelEditModal}
-                                        deleteItem={deleteItem}
                                         setShowDelete={setShowDelete}
                                     />
                                 )}
@@ -144,8 +134,7 @@ const Home = () => {
                             <ControlRecordModal
                                 showModal={showModal}
                                 closeModal={() => setShowModal(false)}
-                                successModal={modalType === "edit" ? editItem : addItem}
-                                modalType={modalType}
+                                successModal={modalData._id ? editItem : addItem}
                                 modalData={modalData}
                             />
                             {/* delete modal */}

@@ -2,8 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { createProductApi, updateProductApi, uploadImage } from "../../../api";
 import { useForm } from "../../../utils";
-import { Input, ImageInput } from "../../index.js";
-import { Spinner } from "../../Spinner";
+import { Input, ImageInput, Loader } from "../../index.js";
 import { Modal } from "../Modal";
 import "./index.css";
 
@@ -69,13 +68,13 @@ export const ControlRecordModal = ({
                 "category": values.category
             }
 
-            const { success, data } = modalType === "edit" ?
+            const { success, data } = modalData._id ?
                 await updateProductApi(modalData._id, savedData)
                 :
                 await createProductApi(savedData)
 
             successModal(data);
-            if (modalType === "edit") {
+            if (modalData._id) {
                 closeModal()
             }
 
@@ -96,9 +95,7 @@ export const ControlRecordModal = ({
 
     return (
         <Modal showModal={showModal} closeModal={closeModal} saveModal={() => saveModal()}>
-            {isLoading ?
-                <Spinner customerStyle="w-full h-full p-10" />
-                :
+            <Loader loading={isLoading}>
                 <form className="flex-auto p-4 lg:px-10 py-10 pt-0">
                     <Input
                         label="name"
@@ -166,8 +163,7 @@ export const ControlRecordModal = ({
                         }
                     </div>
                 </form>
-            }
-
+            </Loader>
         </Modal>
     )
 }

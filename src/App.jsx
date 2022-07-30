@@ -24,7 +24,7 @@ function App() {
           </Route>
 
           <Route path="/" element={<Authorized children={<Layout />} />}>
-            <Route path="" element={<Home />} />
+            <Route index element={<Home />} />
             <Route path="profile" element={<Profile />} />
             <Route path="Product/:productId" element={<Product />} />
           </Route>
