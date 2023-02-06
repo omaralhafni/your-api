@@ -13,10 +13,10 @@
     lg:w-6/12
     mb-6 
     shadow-lg 
-    rounded-lg 
+    /* rounded-lg  */
     border-0 
     bg-white
-    dark:bg-gray-600 
+    /* dark:bg-gray-600  */
     /* opacity-90; */;
   }
 

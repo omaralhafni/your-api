@@ -40,7 +40,7 @@ const Login = () => {
                 errors={errors}
                 handleChange={handleChange}
             />
-            <div>
+            {/* <div>
                 <label className="inline-flex items-center cursor-pointer">
                     <input
                         id="customCheckLogin"
@@ -51,7 +51,7 @@ const Login = () => {
                         Remember me
                     </span>
                 </label>
-            </div>
+            </div> */}
 
             <div className="text-center mt-6">
                 <button
