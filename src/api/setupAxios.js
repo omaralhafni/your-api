@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const { REACT_APP_URL } = process.env
+const { REACT_APP_URL_V1 } = process.env
 
 const Axios = axios.create({
-    baseURL: `${REACT_APP_URL}`,
+    baseURL: `${REACT_APP_URL_V1}`,
 });
 
 Axios.interceptors.request.use(
