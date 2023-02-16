@@ -1,13 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   fetchUserProfileData,
   updateUserProfileData,
   uploadImage,
-} from "../../api";
-import { DisplayInput, Spinner } from "../../components";
-import { useForm } from "../../utils";
+} from "../../../api";
+import { DisplayInput, Loader } from "../../../components";
+import { UserContext } from "../../../context";
+import { useForm } from "../../../utils";
 import "./index.css";
 
 const { REACT_APP_URL_V1 } = process.env;
@@ -15,7 +17,12 @@ const { REACT_APP_URL_V1 } = process.env;
 const Profile = () => {
   const [saveBtn, setSaveBtn] = useState(false);
   const [changePass, setChangePass] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const {
+    userData: { userName },
+  } = useContext(UserContext);
+
+  const { origin } = window.location;
 
   // save changes data for user
   const save = async () => {
@@ -38,7 +45,7 @@ const Profile = () => {
   const fetchData = useCallback(async () => {
     const { data } = await fetchUserProfileData();
     setValues(data);
-    setIsLoading(true);
+    setIsLoading(false);
   }, [setValues]);
 
   useEffect(() => {
@@ -52,18 +59,16 @@ const Profile = () => {
   };
 
   // handle click copy
-  const handleCopy = (name) => {
-    navigator.clipboard.writeText(
-      `https://myouapi.herokuapp.com/v1/products/${name}`
-    );
+  const handleCopy = (paramLink) => {
+    navigator.clipboard.writeText(paramLink);
     toast.success("Copied!", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center">
-      {isLoading ? (
+    <Loader loading={isLoading}>
+      <div className="w-full h-screen flex items-center justify-center">
         <form
           onSubmit={handleSubmit}
           className="relative h-auto bg-gray-400 dark:bg-gray-700 rounded-md pt-24 pb-8 px-5 lg:px-16 shadow-md hover:shadow-lg transition flex flex-col items-center"
@@ -72,8 +77,10 @@ const Profile = () => {
             <img
               className="w-full h-full rounded-full"
               src={
-                typeof values?.profileImage == "string"
-                  ? values?.profileImage === ""
+                typeof values?.profileImage == "string" ||
+                typeof values?.profileImage == "undefined"
+                  ? values?.profileImage === "" ||
+                    values?.profileImage === "undefined"
                     ? "/assets/images/user.png"
                     : values?.profileImage
                   : URL.createObjectURL(values?.profileImage)
@@ -145,17 +152,31 @@ const Profile = () => {
             </button>
           )}
 
-          <p
-            className="text-gray-300 cursor-pointer"
-            onClick={() => handleCopy(values?.userName)}
-          >
-            {REACT_APP_URL_V1}products/{values?.userName}
-          </p>
+          <div>
+            <label className="display-input-label">Your web page : </label>
+            <Link
+              to={`/public/${userName}`}
+              target="_blank"
+              className="link-paragraph"
+              // onClick={() => handleCopy(values?.userName)}
+            >
+              {origin}/public/{userName}
+            </Link>
+          </div>
+          <div>
+            <label className="display-input-label">Your API Link : </label>
+            <p
+              className="link-paragraph"
+              onClick={() =>
+                handleCopy(`${REACT_APP_URL_V1}products/${values?.userName}`)
+              }
+            >
+              {REACT_APP_URL_V1}products/{values?.userName}
+            </p>
+          </div>
         </form>
-      ) : (
-        <Spinner color="#334155" />
-      )}
-    </div>
+      </div>
+    </Loader>
   );
 };
 

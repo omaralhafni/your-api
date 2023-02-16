@@ -16,3 +16,15 @@
     dark:hover:bg-blue-700 
     dark:focus:ring-blue-800;
 }
+
+.link-paragraph {
+  @apply text-gray-300 cursor-pointer inline-block;
+}
+
+@media screen and (max-width: 800px) {
+  .link-paragraph {
+    width: 250px;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+}

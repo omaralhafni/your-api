@@ -62,7 +62,8 @@
   overflow-wrap: break-word;
   @apply mt-4 
   text-sm 
-  text-gray-600;
+  text-gray-600
+  cursor-pointer;
 }
 
 .card-name {
@@ -71,5 +72,6 @@
   font-semibold
   uppercase
   leading-tight
-  truncate;
+  truncate
+  cursor-pointer;
 }

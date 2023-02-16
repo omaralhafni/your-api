@@ -3,9 +3,9 @@
   height: 250px;
   width: 250px;
   border-radius: 50%;
-  background-color: transparent;
-  /* border: 2px solid rgb(253, 242, 253); */
-  /* border: 2px solid purple; */
+  /* background-color: transparent; */
+  border: 1px solid #007bff;
+  border: 1px solid #007bff;
   border-bottom: none;
   border-left: none;
   animation: spin 4.5s infinite linear reverse;

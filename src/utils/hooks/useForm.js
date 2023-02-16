@@ -1,17 +1,16 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export const useForm = (callback, validate) => {
-
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
 
   const handleError = (values) => {
-    setErrors({ ...errors, ...values })
-  }
+    setErrors({ ...errors, ...values });
+  };
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
-    validate && validate('submit', '', values, handleError);
+    validate && validate("submit", "", values, handleError);
     callback();
   };
 
@@ -19,12 +18,10 @@ export const useForm = (callback, validate) => {
     event.persist();
     const { name, value, type, files } = event.target;
     validate && validate(name, value, values, handleError);
-    type === "file" ?
-      setValues(values => ({ ...values, [name]: files[0] }))
-      :
-      setValues(values => ({ ...values, [name]: value }));
+    type === "file"
+      ? setValues((values) => ({ ...values, [name]: files[0] }))
+      : setValues((values) => ({ ...values, [name]: value }));
   };
-
 
   return {
     values,
@@ -32,6 +29,5 @@ export const useForm = (callback, validate) => {
     handleChange,
     handleSubmit,
     errors,
-  }
+  };
 };
-

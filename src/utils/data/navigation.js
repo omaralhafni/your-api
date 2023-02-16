@@ -4,13 +4,13 @@ import { HiOutlineDocumentText } from "react-icons/hi";
 
 export const navigationData = [
     {
-        path: '/',
+        path: '/dashboard/',
         name: "Home",
         icon: <AiFillHome />
     },
 
     {
-        path: '/profile',
+        path: '/dashboard/profile',
         name: "profile",
         icon: <CgProfile />
     },

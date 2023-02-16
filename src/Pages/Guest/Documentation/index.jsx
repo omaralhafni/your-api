@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { Loader, Nav } from "../../components";
-
+import { Loader } from "../../../components";
 const { REACT_APP_URL } = process.env;
 
-const Documentation = () => {
+export const Documentation = () => {
   const [loading, setLoading] = useState(true);
   return (
     <>
-      <Nav />
       <Loader loading={loading} />
 
       <iframe
