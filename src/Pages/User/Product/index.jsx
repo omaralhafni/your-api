@@ -33,6 +33,7 @@ const Product = () => {
 
   useEffect(() => {
     fetchData();
+    console.log("🚀 ~ file: index.jsx:37 ~ useEffect ~ fetchData")
   }, [fetchData]);
 
   return (
