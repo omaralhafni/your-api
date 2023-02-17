@@ -14,6 +14,7 @@ import {
   Loader,
 } from "../../../components";
 import "./index.css";
+
 const initialModalValue = {
   name: "",
   description: "",
@@ -67,6 +68,7 @@ const HomeDash = () => {
 
   // handle edit data by modal
   const handelEditModal = (currentCardData = initialModalValue) => {
+    console.log("🚀 ~ file: index.jsx:70 ~ handelEditModal ~ handelEditModal");
     setShowModal(true);
     if (currentCardData._id) {
       setModalData({ ...currentCardData, isEdit: true });
@@ -77,7 +79,7 @@ const HomeDash = () => {
 
   // handle edit item from page [state]
   const addItem = (newtData) => {
-    data.length / 12 !== 1 && setData((items) => [...items, newtData]);
+    data?.length / 12 !== 1 && setData((items) => [...items, newtData]);
   };
 
   // handle edit item from page [state]
@@ -117,11 +119,6 @@ const HomeDash = () => {
 
   return (
     <>
-      <IoIosAddCircleOutline
-        className="add-product-icon"
-        onClick={handelEditModal}
-      />
-
       <SearchInput
         handleSearch={handleSearch}
         fetchData={fetchData}
@@ -129,7 +126,11 @@ const HomeDash = () => {
       />
 
       <Loader loading={isLoading}>
-        {data.length > 0 ? (
+        <IoIosAddCircleOutline
+          className="add-product-icon"
+          onClick={handelEditModal}
+        />
+        {data?.length > 0 ? (
           <>
             <section className="home-container">
               {data?.map((element, index) => (
@@ -142,7 +143,7 @@ const HomeDash = () => {
               ))}
             </section>
             <div className="flex justify-center m-6 pb-24 lg:pb-0">
-              {data.length !== totalProducts && (
+              {data?.length !== totalProducts && (
                 <button
                   onClick={() => fetchDataByPageNum(numPages + 1)}
                   className="show-more-btn "
@@ -151,14 +152,6 @@ const HomeDash = () => {
                 </button>
               )}
             </div>
-
-            {/* update modal */}
-            <ControlRecordModal
-              showModal={showModal}
-              closeModal={() => setShowModal(false)}
-              successModal={modalData._id ? editItem : addItem}
-              modalData={modalData}
-            />
             {/* delete modal */}
             <DeleteModal
               showModal={showDelete.status}
@@ -170,6 +163,13 @@ const HomeDash = () => {
         ) : (
           <NoProducts />
         )}
+        {/* update modal */}
+        <ControlRecordModal
+          showModal={showModal}
+          closeModal={() => setShowModal(false)}
+          successModal={modalData._id ? editItem : addItem}
+          modalData={modalData}
+        />
       </Loader>
     </>
   );

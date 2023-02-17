@@ -2,17 +2,23 @@
   @apply h-16 
     w-16 
     fixed 
-    z-10 
-    bottom-8 
-    right-12 
-    text-slate-700 
+    z-40
+    bottom-16
+    md:bottom-8
+    right-[44vw]
+    md:right-12 
+    text-white
+    md:text-slate-700 
     cursor-cell 
     rounded-full 
-    hover:bg-gray-100;
+    md:hover:bg-gray-100
+    bg-slate-700 
+    md:bg-transparent;
 }
+
 .show-more-btn {
   @apply bg-transparent
-  hover:bg-blue-500
+  md:hover:bg-blue-500
   text-blue-700
   font-semibold
   hover:text-white

@@ -156,12 +156,12 @@ export const ControlRecordModal = ({
                 image={item}
                 _id={index}
                 name="images"
-                displayClose={values?.images.length > 1}
+                displayClose={values?.images?.length > 1}
                 handleClose={() => handleDeleteImage(index)}
                 handleChange={(e) => handleAddImage(e, index)}
               />
             ))}
-            {values?.images && values?.images.length < 5 && (
+            {values?.images && values?.images?.length < 5 && (
               <label
                 className="image-label-empty"
                 onClick={() =>

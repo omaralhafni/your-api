@@ -20,7 +20,7 @@ export const Modal = ({
             <div className="content-modal">
               {/*header*/}
               <div className="header-modal">
-                <h3 className="text-3xl font-semibold dark:text-gray-300 uppercase">
+                <h3 className="text-2xl md:text-3xl font-semibold dark:text-gray-300 uppercase">
                   {title}
                 </h3>
                 <button className="btn-close-modal-x" onClick={closeModal}>
