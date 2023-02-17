@@ -2,11 +2,12 @@ import { useState, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { UserContext } from "./context";
 import Layout from "./Pages/Guest/Layout";
+import Auth from "./Pages/Guest/Auth";
 import { ToastIfy } from "./components";
 import { checkTokenExpiration, Authorized, Unauthorized } from "./utils";
 
 const Home = lazy(() => import("./Pages/Guest/Home"));
-const Auth = lazy(() => import("./Pages/Guest/Auth"));
+// const Auth = lazy(() => import("./Pages/Guest/Auth"));
 const Login = lazy(() => import("./Pages/Guest/Auth/Login"));
 const Register = lazy(() => import("./Pages/Guest/Auth/Register"));
 const PublicUserPage = lazy(() => import("./Pages/Guest/PublicUserPage"));
