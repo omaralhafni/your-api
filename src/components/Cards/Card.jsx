@@ -10,7 +10,7 @@ export const Card = ({ data = {}, userName = "" }) => {
         alt="product"
         className="product-card-image"
       />
-      <Link to={`/${userName}/${data?._id}`}>
+      <Link to={`/public/${userName}/${data?._id}`}>
         <div className="relative px-4 -mt-16 mb-5 cursor-pointer">
           <div className="bg-white py-2 px-6 rounded-lg shadow-lg cursor-pointer">
             <h4 className="card-name">{data?.name}</h4>
