@@ -49,7 +49,11 @@ const Product = () => {
         <div className="w-full lg:w-[60%] p-3">
           {images &&
             images.map((item, index) => (
-              <div onClick={() => setActive(index)} className="product-image">
+              <div
+                onClick={() => setActive(index)}
+                className="product-image"
+                key={index}
+              >
                 <div className="w-full lg:w-[20%] my-3 flex justify-center items-center">
                   {index === active ? (
                     <p className="product-image-description">

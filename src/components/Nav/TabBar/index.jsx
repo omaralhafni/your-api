@@ -8,7 +8,7 @@ import { logout } from "../../../api";
 export const TabBar = ({ handleLogout }) => {
   return (
     <nav className="tabBar">
-      {navigationData?.map((item, index) => (
+      {navigationData?.map((item) => (
         <NavLink to={item.path} key={item.name}>
           {({ isActive }) => (
             <span className={isActive ? "tabItem tabItemActive" : "tabItem"}>

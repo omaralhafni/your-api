@@ -36,11 +36,9 @@ function App() {
           </Route>
 
           {/* You do not need permission to access it */}
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="/public/:userName" element={<PublicUserPage />} />
-            <Route path="/public/:userName/:productId" element={<Product />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/public/:userName" element={<PublicUserPage />} />
+          <Route path="/public/:userName/:productId" element={<Product />} />
           <Route path="/doc" element={<Documentation />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>

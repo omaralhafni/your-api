@@ -153,6 +153,7 @@ export const ControlRecordModal = ({
           <div className="flex flex-wrap gap-2">
             {values?.images?.map((item, index) => (
               <ImageInput
+                key={index}
                 image={item}
                 _id={index}
                 name="images"
