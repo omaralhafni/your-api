@@ -17,7 +17,7 @@ export const Modal = ({
         >
           <div className="relative w-auto my-6 mx-auto min-w-[50%] max-w-[80%]">
             {/*content*/}
-            <div className="content-modal">
+            <form className="content-modal" onSubmit={saveModal}>
               {/*header*/}
               <div className="header-modal">
                 <h3 className="text-2xl md:text-3xl font-semibold dark:text-gray-300 uppercase">
@@ -42,13 +42,13 @@ export const Modal = ({
                 </button>
                 <button
                   className="btn-modal text-white "
-                  type="button"
-                  onClick={saveModal}
+                  type="submit"
+                  // onClick={saveModal}
                 >
                   Save Changes
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
         <div className="modal-bg-shadow" />

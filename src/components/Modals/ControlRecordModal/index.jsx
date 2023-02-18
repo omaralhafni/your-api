@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { createProductApi, updateProductApi, uploadImage } from "../../../api";
-import { useForm } from "../../../utils";
+import { useForm, productValidate } from "../../../utils";
 import { Input, ImageInput, Loader } from "../../index.js";
 import { Modal } from "../Modal";
 import "./index.css";
@@ -13,37 +13,6 @@ export const ControlRecordModal = ({
   modalData = {},
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { values, handleChange, setValues } = useForm();
-
-  const handleFirstCall = useCallback(() => {
-    setValues(modalData);
-  }, [modalData, setValues]);
-
-  useEffect(() => {
-    handleFirstCall();
-  }, [handleFirstCall]);
-
-  // handle change image and banner image form values
-  const handleAddImage = async (e, index) => {
-    setValues((dataValues) => ({
-      ...dataValues,
-      images: dataValues.images.map((item, i) =>
-        index === i ? e.target.files[0] : item
-      ),
-    }));
-  };
-
-  // handle delete image
-  const handleDeleteImage = useCallback(
-    (index) => {
-      setValues((dataValues) => ({
-        ...dataValues,
-        images: dataValues.images.filter((_, i) => index !== i),
-      }));
-    },
-    [setValues]
-  );
-
   // handle save and update modal values
   const saveModal = async () => {
     try {
@@ -97,19 +66,53 @@ export const ControlRecordModal = ({
     }
   };
 
+  const { values, errors, handleChange, setValues, handleSubmit } = useForm(
+    saveModal,
+    productValidate
+  );
+  const handleFirstCall = useCallback(() => {
+    setValues(modalData);
+  }, [modalData, setValues]);
+
+  useEffect(() => {
+    handleFirstCall();
+  }, [handleFirstCall]);
+
+  // handle change image and banner image form values
+  const handleAddImage = async (e, index) => {
+    setValues((dataValues) => ({
+      ...dataValues,
+      images: dataValues.images.map((item, i) =>
+        index === i ? e.target.files[0] : item
+      ),
+    }));
+  };
+
+  // handle delete image
+  const handleDeleteImage = useCallback(
+    (index) => {
+      setValues((dataValues) => ({
+        ...dataValues,
+        images: dataValues.images.filter((_, i) => index !== i),
+      }));
+    },
+    [setValues]
+  );
+
   return (
     <Modal
       showModal={showModal}
       title={modalData?.isEdit ? "Edit a Record" : "Add a New Record"}
       closeModal={closeModal}
-      saveModal={() => saveModal()}
+      saveModal={handleSubmit}
     >
       <Loader loading={isLoading}>
-        <form className="flex-auto p-4 lg:px-10 py-10 pt-0">
+        <div className="flex-auto p-4 lg:px-10 py-10 pt-0">
           <Input
             label="name"
             name="name"
             values={values}
+            errors={errors}
             handleChange={handleChange}
             max={20}
           />
@@ -118,6 +121,7 @@ export const ControlRecordModal = ({
             label="description"
             name="description"
             values={values}
+            errors={errors}
             handleChange={handleChange}
             max={30}
           />
@@ -126,13 +130,14 @@ export const ControlRecordModal = ({
             label="category"
             name="category"
             values={values}
+            errors={errors}
             handleChange={handleChange}
             max={10}
           />
 
           {/* add banner image */}
           <label className="block m-2 text-sm font-medium text-gray-400">
-            add banner image for record
+            banner image
           </label>
 
           <ImageInput
@@ -148,7 +153,7 @@ export const ControlRecordModal = ({
 
           {/* add  images */}
           <label className="block m-2 text-sm font-medium text-gray-400">
-            add images for record
+            sub of images
           </label>
           <div className="flex flex-wrap gap-2">
             {values?.images?.map((item, index) => (
@@ -157,7 +162,8 @@ export const ControlRecordModal = ({
                 image={item}
                 _id={index}
                 name="images"
-                displayClose={values?.images?.length > 1}
+                displayClose
+                // displayClose={values?.images?.length > 1}
                 handleClose={() => handleDeleteImage(index)}
                 handleChange={(e) => handleAddImage(e, index)}
               />
@@ -176,7 +182,7 @@ export const ControlRecordModal = ({
               </label>
             )}
           </div>
-        </form>
+        </div>
       </Loader>
     </Modal>
   );
